@@ -1,0 +1,50 @@
+#courses {
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    max-width: 800px;
+}
+
+#courses h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #4CAF50; /* Green color for headings */
+}
+
+.course {
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 15px;
+    transition: box-shadow 0.3s ease;
+}
+
+.course:hover {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.course h3 {
+    color: #333;
+}
+
+.course p {
+    margin: 5px 0;
+}
+
+.enroll-button {
+    background: #4CAF50; /* Green background */
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.3s ease;
+}
+
+.enroll-button:hover {
+    background: #45a049; /* Darker green on hover */
+}

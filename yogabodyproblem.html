@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yoga for Body Problems</title>
+    <link rel="stylesheet" href="yogabodyproblem.css">
+</head>
+<body>
+    <header>
+        <h1>Yoga for Body Problems</h1>
+    </header>
+    <main>
+        <section id="body-problems">
+            <h2>Select a Body Problem</h2>
+            <select id="problem-select">
+                <option value="">--Select a Problem--</option>
+                <option value="back-pain">Back Pain</option>
+                <option value="neck-pain">Neck Pain</option>
+                <option value="joint-pain">Joint Pain</option>
+                <option value="stress">Stress</option>
+                <option value="shoulder-pain">Shoulder Pain</option>
+            </select>
+            <button id="submit-btn">Get Recommendations</button>
+        </section>
+
+        <section id="results" class="hidden">
+            <h2>Recommended Asanas</h2>
+            <div id="asana-results">
+                <h3 id="asana-name"></h3>
+                <img id="asana-image" src="" alt="" style="max-width: 100%; display: none;">
+                <h4>Things to Avoid:</h4>
+                <ul id="avoid-list"></ul>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p style="text-align: center;">&copy; 2025 Yoga for Everyone</p>
+    </footer>
+
+    <script>
+        // Yoga Asana Data
+        const yogaAsanas = {
+            "back-pain": {
+                name: "Bhujangasana (Cobra Pose)",
+                image: "y2.jpeg", // Replace with actual image URL
+                avoid: ["Forward bending", "Heavy lifting", "Sudden twisting movements"]
+            },
+            "neck-pain": {
+                name: "Matsyasana (Fish Pose)",
+                image: "fishpose.jpeg", // Replace with actual image URL
+                avoid: ["Rapid neck movements", "Sleeping without proper neck support"]
+            },
+            "joint-pain": {
+                name: "Vrikshasana (Tree Pose)",
+                image: "vrikshasana.jpeg", // Replace with actual image URL
+                avoid: ["Overstretching", "High-impact movements"]
+            },
+            "stress": {
+                name: "Balasana (Child's Pose)",
+                image: "https://www.yogajournal.com/wp-content/uploads/2021/11/childs-pose.jpg", // Replace with actual image URL
+                avoid: ["Holding breath", "Overexertion"]
+            },
+            "shoulder-pain": {
+                name: "Gomukhasana (Cow Face Pose)",
+                image: "https://www.yogajournal.com/wp-content/uploads/2021/11/cow-face-pose.jpg", // Replace with actual image URL
+                avoid: ["Overstretching shoulders", "Sudden jerks"]
+            }
+        };
+
+        document.getElementById("submit-btn").addEventListener("click", function() {
+            const selectedProblem = document.getElementById("problem-select").value;
+            const resultSection = document.getElementById("results");
+            const asanaName = document.getElementById("asana-name");
+            const asanaImage = document.getElementById("asana-image");
+            const avoidList = document.getElementById("avoid-list");
+
+            if (selectedProblem && yogaAsanas[selectedProblem]) {
+                // Show results section
+                resultSection.classList.remove("hidden");
+
+                // Set asana details
+                asanaName.textContent = yogaAsanas[selectedProblem].name;
+                asanaImage.src = yogaAsanas[selectedProblem].image;
+                asanaImage.style.display = "block"; // Make sure the image is visible
+
+                // Display things to avoid
+                avoidList.innerHTML = "";
+                yogaAsanas[selectedProblem].avoid.forEach(item => {
+                    let li = document.createElement("li");
+                    li.textContent = item;
+                    avoidList.appendChild(li);
+                });
+            } else {
+                alert("Please select a valid body problem.");
+            }
+        });
+    </script>
+</body>
+</html>
