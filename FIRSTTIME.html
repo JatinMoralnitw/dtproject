@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Email Login via Magic Link</title>
+    
+    <!-- ✅ Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.10.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.10.0/firebase-auth-compat.js"></script>
+
+    <style>
+        /* 🌿 Natural Yoga & Plant Theme */
+        body {
+            font-family: "Poppins", sans-serif;
+            background-color: #e8f5e9; /* Soft Green Background */
+            color: #2e7d32; /* Deep Green Text */
+            text-align: center;
+            padding: 40px;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 350px;
+        }
+
+        h2 {
+            font-size: 24px;
+            font-weight: bold;
+            color: #1b5e20; /* Dark Green */
+        }
+
+        input {
+            width: 90%;
+            padding: 10px;
+            margin: 15px 0;
+            border: 2px solid #66bb6a; /* Light Green Border */
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            background: #43a047; /* Deep Green */
+            color: white;
+            padding: 12px;
+            width: 100%;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: 0.3s ease-in-out;
+        }
+
+        button:hover {
+            background: #2e7d32; /* Darker Green */
+        }
+
+        .yoga-image {
+            width: 100px;
+            height: auto;
+            margin-bottom: 15px;
+        }
+    </style>
+
+    <script>
+        // 🔹 Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyAyUN4SqxUVkVYyj10JGjBNhX_0MBpjKI4",
+            authDomain: "yogadev-502a2.firebaseapp.com",
+            projectId: "yogadev-502a2",
+            storageBucket: "yogadev-502a2.firebasestorage.app",
+            messagingSenderId: "315487260320",
+            appId: "1:315487260320:web:4d45fa9cd9099b5f57c3c5",
+            measurementId: "G-2QEMLLTFYC"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+
+        async function sendMagicLink() {
+            const email = document.getElementById("email").value.trim();
+
+            if (!email) {
+                alert("Please enter your email.");
+                return;
+            }
+
+            try {
+                await firebase.auth().sendSignInLinkToEmail(email, {
+                    url: window.location.href,
+                    handleCodeInApp: true
+                });
+
+                localStorage.setItem("emailForSignIn", email);
+                alert("Login link sent! Check your email.");
+            } catch (error) {
+                alert("Error: " + error.message);
+            }
+        }
+
+        async function checkSignIn() {
+            if (firebase.auth().isSignInWithEmailLink(window.location.href)) {
+                let email = localStorage.getItem("emailForSignIn");
+
+                if (!email) {
+                    email = prompt("Please enter your email to confirm:");
+                }
+
+                try {
+                    await firebase.auth().signInWithEmailLink(email, window.location.href);
+                    alert("Login successful!");
+
+                    localStorage.removeItem("emailForSignIn");
+                    
+                    // ✅ Redirect to Yoga Page
+                    window.location.href = "https://jatinmoralnitw.github.io/dtproject/yoga.html"; 
+
+                } catch (error) {
+                    alert("Error: " + error.message);
+                }
+            }
+        }
+    </script>
+</head>
+<body onload="checkSignIn()">
+    <div class="container">
+        <!-- 🌿 Yoga & Nature-Themed Image -->
+        <img class="yoga-image" src="https://cdn-icons-png.flaticon.com/512/2900/2900856.png" alt="Yoga Icon">
+        
+        <h2>Email Login via Magic Link</h2>
+        <input type="email" id="email" placeholder="Enter your email" required />
+        <button onclick="sendMagicLink()">Send Login Link</button>
+    </div>
+</body>
+</html>
