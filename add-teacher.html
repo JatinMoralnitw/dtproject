@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Teacher</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        h2 {
+            color: #333;
+        }
+        input, button {
+            display: block;
+            margin: 10px 0;
+            padding: 10px;
+            width: 100%;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Add Teacher</h2>
+    <label>Teacher Name:</label>
+    <input type="text" id="teacherName" placeholder="Enter teacher name">
+    
+    <label>Image URL:</label>
+    <input type="text" id="teacherImageUrl" placeholder="Enter image URL">
+
+    <button id="addTeacherBtn">Add Teacher</button>
+    
+    <p id="statusMessage"></p>
+
+    <script type="module" src="add-teacher.js"></script>
+</body>
+</html>

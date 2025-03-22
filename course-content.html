@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Content</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        h2 {
+            color: #333;
+        }
+        .teacher {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: white;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+        }
+        img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+        }
+        #videoSection {
+            margin-top: 20px;
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Course Content</h2>
+    
+    <div id="teacherInfo" class="teacher">
+        <img id="teacherImage" src="" alt="Teacher">
+        <span id="teacherName"></span>
+    </div>
+
+    <div id="videoSection">
+        <h3>Yoga Video</h3>
+        <video controls width="100%">
+            <source id="yogaVideo" src="" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <script type="module" src="course-content.js"></script>
+</body>
+</html>
