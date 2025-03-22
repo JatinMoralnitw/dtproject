@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Courses</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        h2 {
+            color: #333;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            background: white;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #logoutBtn {
+            background-color: #dc3545;
+            margin-bottom: 20px;
+        }
+        #logoutBtn:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+
+    <button id="logoutBtn">Logout</button>
+
+    <h2>Your Courses</h2>
+    <ul id="courseList">
+        <p>Loading...</p>
+    </ul>
+
+    <h2>Available Courses to Buy</h2>
+    <ul id="availableCourses">
+        <p>Loading...</p>
+    </ul>
+
+    <script type="module" src="courses.js"></script>
+</body>
+</html>

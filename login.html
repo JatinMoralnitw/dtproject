@@ -404,39 +404,6 @@
             justify-content: center;
         }
         
-        .otp-container {
-            display: none;
-            animation: fadeIn 0.4s ease-out;
-        }
-        
-        .otp-container.active {
-            display: block;
-        }
-        
-        .countdown {
-            color: #4ecca3;
-            font-size: 0.85rem;
-            text-align: center;
-            margin-top: 1rem;
-        }
-        
-        .resend-btn {
-            background: none;
-            border: none;
-            color: #4ecca3;
-            cursor: pointer;
-            text-decoration: underline;
-            padding: 0;
-            font-size: 0.85rem;
-            opacity: 0.5;
-            pointer-events: none;
-        }
-        
-        .resend-btn.active {
-            opacity: 1;
-            pointer-events: all;
-        }
-        
         @media (max-width: 768px) {
             .container {
                 flex-direction: column;
@@ -459,6 +426,7 @@
             }
         }
     </style>
+   
     <script type="module" src="register.js" defer></script>
 </head>
 <body>
@@ -567,9 +535,9 @@
                         </div>
                         
                         <div class="form-group">
-                            <label for="mobile-number">Mobile Number</label>
-                            <input type="tel" id="mobile-number" placeholder="Enter your mobile number">
-                            <div class="error-message">Please enter a valid mobile number</div>
+                            <label for="email2">Email Address</label>
+                            <input type="email" id="email2" placeholder="Enter your email address">
+                            <div class="error-message">Please enter a valid email address</div>
                         </div>
                         
                         <div class="form-group">
@@ -594,31 +562,6 @@
                         <div class="signup-link">
                             <p>Already have an account? <a href="#" id="show-login">Login</a></p>
                         </div>
-                    </form>
-                </div>
-                
-                <div class="otp-container" id="otp-container">
-                    <form id="otpForm">
-                        <div class="form-group">
-                            <label for="otp">Enter OTP sent to your mobile</label>
-                            <input type="text" id="otp" placeholder="Enter 6-digit OTP">
-                            <div class="error-message">Please enter a valid OTP</div>
-                        </div>
-                        
-                        <div class="countdown" id="countdown">
-                            Resend OTP in <span id="timer">30</span> seconds
-                        </div>
-                        
-                        <div class="signup-link">
-                            <button type="button" class="resend-btn" id="resend-otp">Resend OTP</button>
-                        </div>
-                        
-                        <button type="submit" class="btn" id="verify-otp-btn">
-                            <div class="login-button-content">
-                                <span>Verify OTP</span>
-                                <div class="spinner" id="otp-spinner"></div>
-                            </div>
-                        </button>
                     </form>
                 </div>
             </div>
@@ -655,24 +598,20 @@
             const tabs = document.querySelectorAll('.tab');
             const loginForm = document.getElementById('login-form');
             const signupForm = document.getElementById('signup-form');
-            const otpContainer = document.getElementById('otp-container');
             const showSignupLink = document.getElementById('show-signup');
             const showLoginLink = document.getElementById('show-login');
             
             const loginFormEl = document.getElementById('loginForm');
             const signupFormEl = document.getElementById('signupForm');
-            const otpFormEl = document.getElementById('otpForm');
             const emailInput = document.getElementById('email');
             const passwordInput = document.getElementById('password');
             const fullNameInput = document.getElementById('full-name');
-            const mobileNumberInput = document.getElementById('mobile-number');
+            const loginEmail = document.getElementById('email2');
             const signupPasswordInput = document.getElementById('signup-password');
             const confirmPasswordInput = document.getElementById('confirm-password');
-            const otpInput = document.getElementById('otp');
             
             const loginSpinner = document.getElementById('login-spinner');
             const signupSpinner = document.getElementById('signup-spinner');
-            const otpSpinner = document.getElementById('otp-spinner');
             
             const toast = document.getElementById('toast');
             
@@ -681,11 +620,6 @@
             const linkedinLogin = document.getElementById('linkedin-login');
             
             const forgotPassword = document.getElementById('forgot-password');
-            const timerElement = document.getElementById('timer');
-            const resendOtpBtn = document.getElementById('resend-otp');
-            
-            let timerInterval;
-            let secondsLeft = 30;
             
             function switchTab(tabId) {
                 tabs.forEach(tab => {
@@ -699,36 +633,10 @@
                 if (tabId === 'login') {
                     loginForm.classList.add('active');
                     signupForm.classList.remove('active');
-                    otpContainer.classList.remove('active');
                 } else if (tabId === 'signup') {
                     loginForm.classList.remove('active');
                     signupForm.classList.add('active');
-                    otpContainer.classList.remove('active');
                 }
-            }
-            
-            function showOtpForm() {
-                loginForm.classList.remove('active');
-                signupForm.classList.remove('active');
-                otpContainer.classList.add('active');
-                startCountdown();
-            }
-            
-            function startCountdown() {
-                secondsLeft = 30;
-                timerElement.textContent = secondsLeft;
-                resendOtpBtn.classList.remove('active');
-                
-                clearInterval(timerInterval);
-                timerInterval = setInterval(function() {
-                    secondsLeft--;
-                    timerElement.textContent = secondsLeft;
-                    
-                    if (secondsLeft <= 0) {
-                        clearInterval(timerInterval);
-                        resendOtpBtn.classList.add('active');
-                    }
-                }, 1000);
             }
             
             tabs.forEach(tab => {
@@ -759,16 +667,6 @@
             function isValidEmail(email) {
                 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
                 return emailRegex.test(email);
-            }
-            
-            function isValidMobile(mobile) {
-                const mobileRegex = /^[0-9]{10}$/;
-                return mobileRegex.test(mobile);
-            }
-            
-            function isValidOTP(otp) {
-                const otpRegex = /^[0-9]{6}$/;
-                return otpRegex.test(otp);
             }
             
             loginFormEl.addEventListener('submit', function(e) {
@@ -809,7 +707,7 @@
                 let isValid = true;
                 
                 fullNameInput.parentElement.classList.remove('error');
-                mobileNumberInput.parentElement.classList.remove('error');
+                loginEmail.parentElement.classList.remove('error');
                 signupPasswordInput.parentElement.classList.remove('error');
                 confirmPasswordInput.parentElement.classList.remove('error');
                 
@@ -818,8 +716,8 @@
                     isValid = false;
                 }
                 
-                if (!isValidMobile(mobileNumberInput.value)) {
-                    mobileNumberInput.parentElement.classList.add('error');
+                if (!isValidEmail(loginEmail.value)) {
+                    loginEmail.parentElement.classList.add('error');
                     isValid = false;
                 }
                 
@@ -838,45 +736,13 @@
                     
                     setTimeout(function() {
                         signupSpinner.style.display = 'none';
-                        showToast('OTP sent to your mobile number', 'success');
-                        showOtpForm();
-                    }, 1500);
-                }
-            });
-            
-            otpFormEl.addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                let isValid = true;
-                
-                otpInput.parentElement.classList.remove('error');
-                
-                if (!isValidOTP(otpInput.value)) {
-                    otpInput.parentElement.classList.add('error');
-                    isValid = false;
-                }
-                
-                if (isValid) {
-                    otpSpinner.style.display = 'block';
-                    
-                    setTimeout(function() {
-                        otpSpinner.style.display = 'none';
-                        showToast('Account created successfully!', 'success');
+                        showToast('Verify email to create account!', 'success');
                         
                         setTimeout(function() {
                             switchTab('login');
                             signupFormEl.reset();
-                            otpFormEl.reset();
-                            clearInterval(timerInterval);
                         }, 2000);
                     }, 1500);
-                }
-            });
-            
-            resendOtpBtn.addEventListener('click', function() {
-                if (resendOtpBtn.classList.contains('active')) {
-                    showToast('OTP resent to your mobile number', 'success');
-                    startCountdown();
                 }
             });
             

@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ManFlow Yoga - Login</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: #121212;
+            color: #f5f5f5;
+            min-height: 100vh;
+        }
+        
+        .container {
+            background: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_Wtt91AuC3GTG2E73r_zkWqKBT27ChADoSw&s);
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        .left-panel {
+            flex: 1;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/api/placeholder/800/1200');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 2rem;
+        }
+        
+        .right-panel {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            background-color: #1a1a1a;
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #4ecca3;
+        }
+        
+        .tagline {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+        
+        .benefits {
+            margin-bottom: 2rem;
+        }
+        
+        .benefits h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: #4ecca3;
+        }
+        
+        .benefit-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.8rem;
+        }
+        
+        .benefit-icon {
+            width: 24px;
+            height: 24px;
+            margin-right: 0.8rem;
+            background-color: #4ecca3;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .image-gallery {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+        }
+        
+        .gallery-image {
+            width: 32%;
+            height: 100px;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-image:hover {
+            transform: scale(1.05);
+        }
+        
+        .gallery-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .form-container {
+            width: 100%;
+            max-width: 400px;
+            background-color: #232323;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        }
+        
+        .form-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .form-header h2 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .tabs {
+            display: flex;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #333;
+        }
+        
+        .tab {
+            flex: 1;
+            text-align: center;
+            padding: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .tab.active {
+            color: #4ecca3;
+            border-bottom: 2px solid #4ecca3;
+        }
+        
+        .tab:hover:not(.active) {
+            color: #9aecd2;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem;
+            border-radius: 6px;
+            border: 1px solid #444;
+            background-color: #2a2a2a;
+            color: #f5f5f5;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: #4ecca3;
+            box-shadow: 0 0 0 2px rgba(78, 204, 163, 0.2);
+        }
+        
+        .remember-me {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .remember-me input {
+            margin-right: 0.5rem;
+        }
+        
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 0.8rem;
+            background-color: #4ecca3;
+            color: #121212;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        
+        .btn:hover {
+            background-color: #3db893;
+            transform: translateY(-2px);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
+        .social-login {
+            margin-top: 1.5rem;
+            text-align: center;
+        }
+        
+        .social-login p {
+            margin-bottom: 1rem;
+            position: relative;
+        }
+        
+        .social-login p::before,
+        .social-login p::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 30%;
+            height: 1px;
+            background-color: #444;
+        }
+        
+        .social-login p::before {
+            left: 0;
+        }
+        
+        .social-login p::after {
+            right: 0;
+        }
+        
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        
+        .social-icon:hover {
+            background-color: #4ecca3;
+            transform: translateY(-2px);
+        }
+        
+        .signup-link {
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+        
+        .signup-link a {
+            color: #4ecca3;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .signup-link a:hover {
+            color: #9aecd2;
+            text-decoration: underline;
+        }
+        
+        .features {
+            margin-top: 3rem;
+        }
+        
+        .features h3 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: #4ecca3;
+        }
+        
+        .feature-cards {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .feature-card {
+            flex: 1;
+            min-width: 200px;
+            background-color: #232323;
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 1rem;
+            background-color: #2a2a2a;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .feature-title {
+            margin-bottom: 0.5rem;
+            color: #4ecca3;
+        }
+        
+        .error-message {
+            color: #ff6b6b;
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+        
+        .form-group.error input {
+            border-color: #ff6b6b;
+        }
+        
+        .form-group.error .error-message {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .form-container {
+            animation: fadeIn 0.6s ease-out;
+        }
+        
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            color: white;
+            font-weight: 500;
+            transform: translateX(150%);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .toast.success {
+            background-color: #4ecca3;
+        }
+        
+        .toast.error {
+            background-color: #ff6b6b;
+        }
+        
+        .toast.show {
+            transform: translateX(0);
+        }
+        
+        .form-content {
+            display: none;
+        }
+        
+        .form-content.active {
+            display: block;
+            animation: fadeIn 0.4s ease-out;
+        }
+        
+        .spinner {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+            margin-left: 10px;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .login-button-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .otp-container {
+            display: none;
+            animation: fadeIn 0.4s ease-out;
+        }
+        
+        .otp-container.active {
+            display: block;
+        }
+        
+        .countdown {
+            color: #4ecca3;
+            font-size: 0.85rem;
+            text-align: center;
+            margin-top: 1rem;
+        }
+        
+        .resend-btn {
+            background: none;
+            border: none;
+            color: #4ecca3;
+            cursor: pointer;
+            text-decoration: underline;
+            padding: 0;
+            font-size: 0.85rem;
+            opacity: 0.5;
+            pointer-events: none;
+        }
+        
+        .resend-btn.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            .left-panel {
+                padding: 1.5rem;
+            }
+            
+            .right-panel {
+                padding: 1.5rem;
+            }
+            
+            .gallery-image {
+                height: 80px;
+            }
+            
+            .feature-cards {
+                flex-direction: column;
+            }
+        }
+    </style>
+   
+    <script type="module" src="register.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <div class="left-panel">
+            <div class="logo">ManFlow Yoga</div>
+            <div class="tagline">Strength-focused yoga for men and women</div>
+            
+            <div class="benefits">
+                <h3>Why Choose ManFlow Yoga?</h3>
+                <div class="benefit-item">
+                    <div class="benefit-icon">✓</div>
+                    <div>Fitness-focused yoga programs</div>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">✓</div>
+                    <div>No-fluff approach to yoga</div>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">✓</div>
+                    <div>Structured workout programs</div>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">✓</div>
+                    <div>Focus on technique and form</div>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">✓</div>
+                    <div>Access to 400+ workouts</div>
+                </div>
+            </div>
+            
+            <div class="image-gallery">
+                <div class="gallery-image">
+                    <img src="https://yoga.ayush.gov.in/public/assets/front/blog/eys.jpg" alt="Yoga pose" width="100%">
+                </div>
+                <div class="gallery-image">
+                    <img src="https://thumbs.dreamstime.com/z/yoga-class-flat-cartoon-illustration-young-women-men-practicing-yoga-exercise-meditation-instructor-yoga-class-flat-165822061.jpg" alt="Yoga class" width="100%" >
+                </div>
+                <div class="gallery-image">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_Wtt91AuC3GTG2E73r_zkWqKBT27ChADoSw&s" alt="Yoga stretch" width="100%">
+                </div>
+            </div>
+        </div>
+        
+        <div class="right-panel">
+            <div class="form-container">
+                <div class="form-header">
+                    <h2>Welcome Back</h2>
+                    <p>Continue your yoga journey</p>
+                </div>
+                
+                <div class="tabs">
+                    <div class="tab active" data-tab="login">Login</div>
+                    <div class="tab" data-tab="signup">Sign Up</div>
+                </div>
+                
+                <div class="form-content active" id="login-form">
+                    <form id="loginForm">
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" placeholder="Enter your email">
+                            <div class="error-message">Please enter a valid email address</div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" id="password" placeholder="Enter your password">
+                            <div class="error-message">Password must be at least 6 characters</div>
+                        </div>
+                        
+                        <div class="remember-me">
+                            <input type="checkbox" id="remember">
+                            <label for="remember">Remember me</label>
+                        </div>
+                        
+                        <button type="submit" class="btn" id="login-btn">
+                            <div class="login-button-content">
+                                <span>Login</span>
+                                <div class="spinner" id="login-spinner"></div>
+                            </div>
+                        </button>
+                        
+                        <div class="social-login">
+                            <p>Or login with</p>
+                            <div class="social-icons">
+                                <div class="social-icon" id="facebook-login">f</div>
+                                <div class="social-icon" id="google-login">G</div>
+                                <div class="social-icon" id="linkedin-login">in</div>
+                            </div>
+                        </div>
+                        
+                        <div class="signup-link">
+                            <p>Don't have an account? <a href="#" id="show-signup">Sign Up</a></p>
+                            <p><a href="#" id="forgot-password">Forgot Password?</a></p>
+                        </div>
+                    </form>
+                </div>
+                
+                <div class="form-content" id="signup-form">
+                    <form id="signupForm">
+                        <div class="form-group">
+                            <label for="full-name">Full Name</label>
+                            <input type="text" id="full-name" placeholder="Enter your full name">
+                            <div class="error-message">Please enter your full name</div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email2">Enter Email Address</label>
+                            <input type="email" id="email2" placeholder="Enter your mobile number">
+                            <div class="error-message">Please enter a valid mobile number</div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="signup-password">Password</label>
+                            <input type="password" id="signup-password" placeholder="Create a password">
+                            <div class="error-message">Password must be at least 8 characters</div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="confirm-password">Confirm Password</label>
+                            <input type="password" id="confirm-password" placeholder="Confirm your password">
+                            <div class="error-message">Passwords do not match</div>
+                        </div>
+                        
+                        <button type="submit" class="btn" id="signup-btn">
+                            <div class="login-button-content">
+                                <span>Create Account</span>
+                                <div class="spinner" id="signup-spinner"></div>
+                            </div>
+                        </button>
+                        
+                        <div class="signup-link">
+                            <p>Already have an account? <a href="#" id="show-login">Login</a></p>
+                        </div>
+                    </form>
+                </div>
+                
+                <div class="otp-container" id="otp-container">
+                    <form id="otpForm">
+                        <div class="form-group">
+                            <label for="otp">Enter OTP sent to your mobile</label>
+                            <input type="text" id="otp" placeholder="Enter 6-digit OTP">
+                            <div class="error-message">Please enter a valid OTP</div>
+                        </div>
+                        
+                        <div class="countdown" id="countdown">
+                            Resend OTP in <span id="timer">30</span> seconds
+                        </div>
+                        
+                        <div class="signup-link">
+                            <button type="button" class="resend-btn" id="resend-otp">Resend OTP</button>
+                        </div>
+                        
+                        <button type="submit" class="btn" id="verify-otp-btn">
+                            <div class="login-button-content">
+                                <span>Verify OTP</span>
+                                <div class="spinner" id="otp-spinner"></div>
+                            </div>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="features">
+                <h3>What We Offer</h3>
+                <div class="feature-cards">
+                    <div class="feature-card">
+                        <div class="feature-icon">🧘</div>
+                        <h4 class="feature-title">Daily Classes</h4>
+                        <p>New workouts added every week</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">📱</div>
+                        <h4 class="feature-title">Mobile App</h4>
+                        <p>Practice anywhere, anytime</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">👥</div>
+                        <h4 class="feature-title">Community</h4>
+                        <p>Join our supportive community</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabs = document.querySelectorAll('.tab');
+            const loginForm = document.getElementById('login-form');
+            const signupForm = document.getElementById('signup-form');
+            const otpContainer = document.getElementById('otp-container');
+            const showSignupLink = document.getElementById('show-signup');
+            const showLoginLink = document.getElementById('show-login');
+            
+            const loginFormEl = document.getElementById('loginForm');
+            const signupFormEl = document.getElementById('signupForm');
+            const otpFormEl = document.getElementById('otpForm');
+            const emailInput = document.getElementById('email');
+            const passwordInput = document.getElementById('password');
+            const fullNameInput = document.getElementById('full-name');
+            const loginemail = document.getElementById('email2');
+            const signupPasswordInput = document.getElementById('signup-password');
+            const confirmPasswordInput = document.getElementById('confirm-password');
+            const otpInput = document.getElementById('otp');
+            
+            const loginSpinner = document.getElementById('login-spinner');
+            const signupSpinner = document.getElementById('signup-spinner');
+            const otpSpinner = document.getElementById('otp-spinner');
+            
+            const toast = document.getElementById('toast');
+            
+            const facebookLogin = document.getElementById('facebook-login');
+            const googleLogin = document.getElementById('google-login');
+            const linkedinLogin = document.getElementById('linkedin-login');
+            
+            const forgotPassword = document.getElementById('forgot-password');
+            const timerElement = document.getElementById('timer');
+            const resendOtpBtn = document.getElementById('resend-otp');
+            
+            let timerInterval;
+            let secondsLeft = 30;
+            
+            function switchTab(tabId) {
+                tabs.forEach(tab => {
+                    if (tab.dataset.tab === tabId) {
+                        tab.classList.add('active');
+                    } else {
+                        tab.classList.remove('active');
+                    }
+                });
+                
+                if (tabId === 'login') {
+                    loginForm.classList.add('active');
+                    signupForm.classList.remove('active');
+                    otpContainer.classList.remove('active');
+                } else if (tabId === 'signup') {
+                    loginForm.classList.remove('active');
+                    signupForm.classList.add('active');
+                    otpContainer.classList.remove('active');
+                }
+            }
+            
+            function showOtpForm() {
+                loginForm.classList.remove('active');
+                signupForm.classList.remove('active');
+                otpContainer.classList.add('active');
+                startCountdown();
+            }
+            
+            function startCountdown() {
+                secondsLeft = 30;
+                timerElement.textContent = secondsLeft;
+                resendOtpBtn.classList.remove('active');
+                
+                clearInterval(timerInterval);
+                timerInterval = setInterval(function() {
+                    secondsLeft--;
+                    timerElement.textContent = secondsLeft;
+                    
+                    if (secondsLeft <= 0) {
+                        clearInterval(timerInterval);
+                        resendOtpBtn.classList.add('active');
+                    }
+                }, 1000);
+            }
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    switchTab(this.dataset.tab);
+                });
+            });
+            
+            showSignupLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                switchTab('signup');
+            });
+            
+            showLoginLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                switchTab('login');
+            });
+            
+            function showToast(message, type) {
+                toast.textContent = message;
+                toast.className = 'toast ' + type + ' show';
+                
+                setTimeout(function() {
+                    toast.classList.remove('show');
+                }, 3000);
+            }
+            
+            function isValidEmail(email) {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return emailRegex.test(email);
+            }
+            
+            function isValidMobile(mobile) {
+                const mobileRegex = /^[0-9]{10}$/;
+                return mobileRegex.test(mobile);
+            }
+            
+            function isValidOTP(otp) {
+                const otpRegex = /^[0-9]{6}$/;
+                return otpRegex.test(otp);
+            }
+            
+            loginFormEl.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                let isValid = true;
+                
+                emailInput.parentElement.classList.remove('error');
+                passwordInput.parentElement.classList.remove('error');
+                
+                if (!isValidEmail(emailInput.value)) {
+                    emailInput.parentElement.classList.add('error');
+                    isValid = false;
+                }
+                
+                if (passwordInput.value.length < 6) {
+                    passwordInput.parentElement.classList.add('error');
+                    isValid = false;
+                }
+                
+                if (isValid) {
+                    loginSpinner.style.display = 'block';
+                    
+                    setTimeout(function() {
+                        loginSpinner.style.display = 'none';
+                        showToast('Login successful! Redirecting...', 'success');
+                        
+                        setTimeout(function() {
+                            loginFormEl.reset();
+                        }, 2000);
+                    }, 1500);
+                }
+            });
+            
+            signupFormEl.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                let isValid = true;
+                
+                fullNameInput.parentElement.classList.remove('error');
+                loginemail.parentElement.classList.remove('error');
+                signupPasswordInput.parentElement.classList.remove('error');
+                confirmPasswordInput.parentElement.classList.remove('error');
+                
+                if (fullNameInput.value.trim() === '') {
+                    fullNameInput.parentElement.classList.add('error');
+                    isValid = false;
+                }
+                
+                if (!isValidEmail(loginemail.value)) {
+                    loginemail.parentElement.classList.add('error');
+                    isValid = false;
+                }
+                
+                if (signupPasswordInput.value.length < 8) {
+                    signupPasswordInput.parentElement.classList.add('error');
+                    isValid = false;
+                }
+                
+                if (confirmPasswordInput.value !== signupPasswordInput.value) {
+                    confirmPasswordInput.parentElement.classList.add('error');
+                    isValid = false;
+                }
+                
+                if (isValid) {
+                    signupSpinner.style.display = 'block';
+                    
+                    setTimeout(function() {
+                        signupSpinner.style.display = 'none';
+                        showToast('OTP sent to your mobile number', 'success');
+                        showOtpForm();
+                    }, 1500);
+                }
+            });
+            
+            otpFormEl.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                let isValid = true;
+                
+                otpInput.parentElement.classList.remove('error');
+                
+                if (!isValidOTP(otpInput.value)) {
+                    otpInput.parentElement.classList.add('error');
+                    isValid = false;
+                }
+                
+                if (isValid) {
+                    otpSpinner.style.display = 'block';
+                    
+                    setTimeout(function() {
+                        otpSpinner.style.display = 'none';
+                        showToast('Account created successfully!', 'success');
+                        
+                        setTimeout(function() {
+                            switchTab('login');
+                            signupFormEl.reset();
+                            otpFormEl.reset();
+                            clearInterval(timerInterval);
+                        }, 2000);
+                    }, 1500);
+                }
+            });
+            
+            resendOtpBtn.addEventListener('click', function() {
+                if (resendOtpBtn.classList.contains('active')) {
+                    showToast('OTP resent to your mobile number', 'success');
+                    startCountdown();
+                }
+            });
+            
+            facebookLogin.addEventListener('click', function() {
+                showToast('Facebook login coming soon!', 'success');
+            });
+            
+            googleLogin.addEventListener('click', function() {
+                showToast('Google login coming soon!', 'success');
+            });
+            
+            linkedinLogin.addEventListener('click', function() {
+                showToast('LinkedIn login coming soon!', 'success');
+            });
+            
+            forgotPassword.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const email = prompt('Enter your email address to reset your password:');
+                
+                if (email && isValidEmail(email)) {
+                    showToast('Password reset link sent to your email!', 'success');
+                } else if (email) {
+                    showToast('Please enter a valid email address', 'error');
+                }
+            });
+            
+            const galleryImages = document.querySelectorAll('.gallery-image img');
+            let currentImageIndex = 0;
+            
+            setInterval(function() {
+                galleryImages.forEach((img, index) => {
+                    if (index === currentImageIndex) {
+                        img.style.opacity = '1';
+                    } else {
+                        img.style.opacity = '0.6';
+                    }
+                });
+                
+                currentImageIndex = (currentImageIndex + 1) % galleryImages.length;
+            }, 3000);
+        });
+    </script>
+</body>
+</html>
